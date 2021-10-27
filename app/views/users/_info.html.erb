@@ -24,6 +24,14 @@
   </div>
 <% else %>
   <div class='row'>
-    <%= link_to '',edit_user_path(user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{user.id}" %>
+    <% if @user.is_followed_by?(current_user) %>
+     <%= link_to user_relationships_path(user), method: :delete do %>
+     <button class="btn btn-info">フォロー外す</button>
+     <% end %>
+    <% else %>
+     <%= link_to user_relationships_path(user), method: :post do %>
+     <button class="btn btn-success">フォローする</button>
+     <% end %>
+    <% end %>
   </div>
 <% end %>

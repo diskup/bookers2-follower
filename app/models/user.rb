@@ -17,4 +17,8 @@ class User < ApplicationRecord
 
   validates :name, length: {maximum: 20, minimum: 2}, uniqueness: true
   validates :introduction, length: { maximum: 50}
+  def is_followed_by?(user)
+    reverse_of_relationsips.find_by(follower_id: user.id).present?
+  end
+
 end
